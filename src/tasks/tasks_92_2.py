@@ -36,6 +36,15 @@ def filter_russian_name(file_name: str) -> list:
     return new_names_list
 
 new
+def filter_english_name(file_name: str) -> list:
+    """ фильтрация для английских имен"""
+    new_names_list = list()
+    for name_item in file_name:
+        if not is_cyrillic(name_item):
+            new_names_list.append(name_item)
+    return new_names_list
+
+new
 def save_to_file(file_name: str, data: str) -> None:
     """ Сохраняет данные в файл """
     # путь от корня проекта до файла data/russian_names.txt
@@ -48,10 +57,15 @@ def save_to_file(file_name: str, data: str) -> None:
 if __name__ == '__main__':
     cleared_name = clear_names('names.txt')
 
-    # for i in cleared_name:
-    #     print(i)
-    # print(filter_russian_name(cleared_name))
-    filtered_names = filter_russian_name(cleared_name)
-    # save_to_file('russian_names.txt', filtered_names) так выдаст ошибку: аргументом должен быть str, а не list
-    save_to_file('russian_names.txt', '\n'.join(filtered_names))
+    ## for i in cleared_name:
+    ##     print(i)
+    ## print(filter_russian_name(cleared_name))
+    # filtered_names = filter_russian_name(cleared_name)
+    # #save_to_file('russian_names.txt', filtered_names) так выдаст ошибку: аргументом должен быть str, а не list
+    # save_to_file('russian_names.txt', '\n'.join(filtered_names))
+    # print('\n'.join(filtered_names))
+
+    filtered_names = filter_english_name(cleared_name)
+
+    save_to_file('english_names.txt', '\n'.join(filtered_names))
     print('\n'.join(filtered_names))
