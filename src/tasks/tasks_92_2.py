@@ -35,12 +35,23 @@ def filter_russian_name(file_name: str) -> list:
             new_names_list.append(name_item)
     return new_names_list
 
+new
+def save_to_file(file_name: str, data: str) -> None:
+    """ Сохраняет данные в файл """
+    # путь от корня проекта до файла data/russian_names.txt
+    file_path = Path(__file__).parents[2] / 'data' / file_name
+    with file_path.open('w', encoding='utf-8') as name_file:
+    # with open('data/' + file_name, 'w', encoding='utf-8') as name_file:  Этот путь невидимый.
+        name_file.write(data)
+
 
 if __name__ == '__main__':
     cleared_name = clear_names('names.txt')
 
     # for i in cleared_name:
     #     print(i)
-    print(filter_russian_name(cleared_name))
-    # print(filter_russian_name)
-
+    # print(filter_russian_name(cleared_name))
+    filtered_names = filter_russian_name(cleared_name)
+    # save_to_file('russian_names.txt', filtered_names) так выдаст ошибку: аргументом должен быть str, а не list
+    save_to_file('russian_names.txt', '\n'.join(filtered_names))
+    print('\n'.join(filtered_names))
