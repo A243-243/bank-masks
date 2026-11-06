@@ -9,7 +9,7 @@
 В будущем может быть расширен для обработки пользовательского ввода.
 """
 from src.masks import get_mask_card_number, get_mask_account
-
+from src.widget import mask_account_card
 
 def main():
     """Запускает демонстрацию работы функций маскирования банковских данных.
@@ -29,6 +29,12 @@ def main():
     account_number = "73654108430135874305"
     masked_account = get_mask_account(account_number)
     print(f"Счет: {account_number} → {masked_account}")
+
+    # Тестирование определения типа счет/карта
+    account_or_card_number = "MasterCard 7158300734726758"
+    of_card_or_account_type = mask_account_card(account_or_card_number)
+    print(f"Тип: {account_or_card_number} → {of_card_or_account_type}")
+
 
 
 if __name__ == "__main__":
