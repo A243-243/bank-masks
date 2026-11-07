@@ -9,7 +9,7 @@
 В будущем может быть расширен для обработки пользовательского ввода.
 """
 from src.masks import get_mask_card_number, get_mask_account
-from src.widget import mask_account_card
+from src.widget import mask_account_card, get_date
 
 def main():
     """Запускает демонстрацию работы функций маскирования банковских данных.
@@ -34,6 +34,12 @@ def main():
     account_or_card_number = "MasterCard 7158300734726758"
     of_card_or_account_type = mask_account_card(account_or_card_number)
     print(f"Тип: {account_or_card_number} → {of_card_or_account_type}")
+
+    # Тестирование перевода даты в формат ВВ.ММ.ГГГГ
+    date_ISO = "2024-03-11T02:26:18.671407"
+    formatted_date = get_date(date_ISO)
+    print(f"Дата: {date_ISO} → {formatted_date}")
+
 
 
 
