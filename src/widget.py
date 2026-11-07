@@ -1,6 +1,8 @@
 import re
 from datetime import datetime
+
 from src.masks import get_mask_account, get_mask_card_number
+
 
 # src/widget.py
 def mask_account_card(account_card: str) -> str:
@@ -23,6 +25,24 @@ def get_date(date: str) -> str:
     date_form = datetime.fromisoformat(date)
     return date_form.strftime("%d.%m.%Y")
 
+
+def get_user_input() -> str:
+    """Запрашивает у пользователя данные карты или счета для входа и проверяет корректность ввода"""
+    while True:
+        raw = input("Введите название и номер карты или счёта: ").strip()
+        if not raw:  # пустой ввод или одни пробелы
+            print("Ошибка: Пустой ввод. Попробуйте ещё раз.")
+            continue
+        if len(raw.split()) > 3:  # больше трех подстрок
+            print("Ошибка: Введите две части — название и номер.")
+            continue
+        if raw.count(" ") > 2:
+            print("Ошибка: Введите две части — название и номер.")
+            continue
+        if not 24 <= len(raw) <= 30:  # длина вне допустимого диапазона
+            print("Ошибка: Введите точное количество символов в названии и номере.")
+            continue
+        return raw
 
 
 if __name__ == "__main__":

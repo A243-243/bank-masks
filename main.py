@@ -8,18 +8,20 @@
 В текущем виде содержит тестовые примеры с фиксированными данными.
 В будущем может быть расширен для обработки пользовательского ввода.
 """
-from src.masks import get_mask_card_number, get_mask_account
-from src.widget import mask_account_card, get_date
 
-def main():
+from src.masks import get_mask_account, get_mask_card_number
+from src.widget import get_date, get_user_input, mask_account_card
+
+
+def main()-> None:
     """Запускает демонстрацию работы функций маскирования банковских данных.
 
-        Выполняет тестирование:
-        - маскирует номер карты через get_mask_card_number;
-        - маскирует номер счета через get_mask_account.
+    Выполняет тестирование:
+    - маскирует номер карты через get_mask_card_number;
+    - маскирует номер счета через get_mask_account.
 
-        Выводит результаты в консоль в формате: «Исходное значение → Результат».
-        """
+    Выводит результаты в консоль в формате: «Исходное значение → Результат».
+    """
     # Тестирование маскирования карты
     card_number = "7000792289606361"
     masked_card = get_mask_card_number(card_number)
@@ -40,7 +42,9 @@ def main():
     formatted_date = get_date(date_ISO)
     print(f"Дата: {date_ISO} → {formatted_date}")
 
-
+    user_data = get_user_input()
+    print(f"Результат: {mask_account_card(user_data)}")
+    print(f"Дата: {get_date('2024-03-11T02:26:18.671407')}")
 
 
 if __name__ == "__main__":
