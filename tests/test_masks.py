@@ -14,11 +14,11 @@ class TestGetMaskCardNumber:
             ("123456789012", "1234 56** ****"),  # минимальная длина 12
         ],
     )
-    def test_masks_card_number_correctly(self, card_number, expected):
+    def test_masks_card_number_correctly(self, card_number: str, expected: str) -> None:
         assert get_mask_card_number(card_number) == expected
 
     @pytest.mark.parametrize("card_number", ["1234", "", "12345678901"])
-    def test_too_short_number_raises_index_error(self, card_number):
+    def test_too_short_number_raises_index_error(self, card_number: str) -> None:
         with pytest.raises(IndexError):
             get_mask_card_number(card_number)
 
@@ -33,12 +33,10 @@ class TestGetMaskAccount:
             ("12345678901234567890", "**7890"),  # 20 цифр, другой хвост
         ],
     )
-    def test_masks_account_correctly(self, account_number, expected):
+    def test_masks_account_correctly(self, account_number: str, expected: str) -> None:
         assert get_mask_account(account_number) == expected
 
-    @pytest.mark.parametrize(
-        "account_number", ["", "123", "1234567890", "12345678901234", "123456789012345"]
-    )
-    def test_too_short_account_raises_index_error(self, account_number):
+    @pytest.mark.parametrize("account_number", ["", "123", "1234567890", "12345678901234", "123456789012345"])
+    def test_too_short_account_raises_index_error(self, account_number: str) -> None:
         with pytest.raises(IndexError):
             get_mask_account(account_number)

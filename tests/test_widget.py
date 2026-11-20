@@ -13,24 +13,21 @@ class TestMaskAccountCard:
             ("Счёт 73654108430135874305", "Счёт **4305"),
         ],
     )
-    def test_masks_card_and_account(self, input_data, expected):
+    def test_masks_card_and_account(self, input_data: str, expected: str) -> None:
         assert mask_account_card(input_data) == expected
 
-    def test_latin_name_gets_card_mask(self):
+    def test_latin_name_gets_card_mask(self) -> None:
         """Функция выбирает маску по наличию кириллицы: латиница → маска карты."""
-        assert (
-            mask_account_card("Account 73654108430135874305")
-            == "Account 7365 41** **** 3587 4305"
-        )
+        assert mask_account_card("Account 73654108430135874305") == "Account 7365 41** **** 3587 4305"
 
     @pytest.mark.parametrize("bad_input", ["", "   "])
-    def test_empty_input_raises_index_error(self, bad_input):
+    def test_empty_input_raises_index_error(self, bad_input: str) -> None:
         with pytest.raises(IndexError):
             mask_account_card(bad_input)
 
-    def test_none_raises_type_error(self):
+    def test_none_raises_type_error(self) -> None:
         with pytest.raises(TypeError):
-            mask_account_card(None)
+            mask_account_card(None)  # type: ignore[arg-type]
 
 
 class TestGetDate:
@@ -42,25 +39,25 @@ class TestGetDate:
             ("2018-06-30", "30.06.2018"),  # дата без времени тоже валидна
         ],
     )
-    def test_converts_date(self, date_str, expected):
+    def test_converts_date(self, date_str: str, expected: str) -> None:
         assert get_date(date_str) == expected
 
     @pytest.mark.parametrize("bad_date", ["", "invalid", "2024-13-01T00:00:00"])
-    def test_invalid_date_raises_value_error(self, bad_date):
+    def test_invalid_date_raises_value_error(self, bad_date: str) -> None:
         with pytest.raises(ValueError):
             get_date(bad_date)
 
-    def test_none_raises_type_error(self):
+    def test_none_raises_type_error(self) -> None:
         with pytest.raises(TypeError):
-            get_date(None)
+            get_date(None)  # type: ignore[arg-type]
 
 
 class TestGetUserInput:
-    def test_valid_input(self, monkeypatch):
+    def test_valid_input(self, monkeypatch: pytest.MonkeyPatch) -> None:
         monkeypatch.setattr("builtins.input", lambda _: "Visa Platinum 7000792289606361")
         assert get_user_input() == "Visa Platinum 7000792289606361"
 
-    def test_invalid_then_valid_input(self, monkeypatch):
+    def test_invalid_then_valid_input(self, monkeypatch: pytest.MonkeyPatch) -> None:
         answers = iter(
             [
                 "",  # пустой ввод
