@@ -21,6 +21,10 @@ lint = [
     "black (>=26.10.1,<27.0.0)",
     "isort (>=9.0.2,<10.0.0)"
 ]
+dev = [
+    "pytest (>=9.2.0,<10.0.0)",
+    "pytest-cov (>=7.1.0,<8.0.0)"
+]
 
 [tool.black]
 line-length = 119
@@ -41,4 +45,12 @@ authors = ["Your Name <you@example.com>"]
 
 packages = [
   { include = "tasks", from = "src" }
+]
+
+[tool.coverage.run]
+source = ["src"]
+
+[tool.coverage.report]
+exclude_lines = [
+    "if __name__ == \"__main__\":",
 ]
