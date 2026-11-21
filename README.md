@@ -36,4 +36,28 @@ filter_by_state(transactions)
 
 sort_by_date(transactions)
 # [{'id': 41428829, ...}, {'id': 594226727, ...}, {'id': 939719570, ...}]
+
+```
+## Тестирование
+
+Проект покрыт тестами с помощью `pytest`, контроль покрытия — `pytest-cov`.
+
+### Установка тестовых зависимостей
+
+```bash
+poetry install
+
+```
+
+### Запуск тестов
+
+```bash
+pytest --cov=src --cov-report=term-missing
+
+```
+### HTML-отчёт о покрытии
+
+```bash
+pytest --cov=src --cov-report=html
+
 ```
